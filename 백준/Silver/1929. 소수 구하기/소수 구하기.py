@@ -1,16 +1,12 @@
 m, n = map(int, input().split())
-prime = {i for i in range(m, n+1) if i & 1}
-if m < 3:
-    prime -= {1}
-    prime.add(2)
+not_prime = {1}
+for i in range(2, n//2+1):
+    k = i + i
+    while k < n+1:
+        if k >= m:
+            not_prime.add(k)
+        k += i
 
-not_prime = set()
-for i in range(3, n//2+1):
-    num = i + i
-    while num < n+1:
-        if num > m-1:
-            not_prime.add(num)
-        num += i
-
-prime -= not_prime
-print(*sorted(list(prime)), sep='\n')
+for j in range(m, n+1):
+    if j not in not_prime:
+        print(j)
