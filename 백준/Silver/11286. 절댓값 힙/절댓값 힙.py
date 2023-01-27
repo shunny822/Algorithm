@@ -1,17 +1,16 @@
 import sys
+input = sys.stdin.readline
 import heapq
 
-l = []
-heapq.heapify(l)
-
 n = int(input())
+array = []
 for _ in range(n):
-    x = int(sys.stdin.readline())
-    if x == 0:
-        if l:
-            print(l[0][1])
-            heapq.heappop(l)
+    x = int(input())
+    if x != 0:
+        heapq.heappush(array, (abs(x), x))
+    else:
+        if array:
+            print(array[0][1])
+            heapq.heappop(array)
         else:
             print(0)
-    else:
-        heapq.heappush(l, (abs(x), x))
