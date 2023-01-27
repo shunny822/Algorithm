@@ -1,5 +1,6 @@
-nums = set()
-for i in range(10):
-    n = int(input())
-    nums.add(n%42)
-print(len(nums))
+import sys
+
+r = set()
+for _ in range(10):
+    r.add(int(sys.stdin.readline())%42)
+print(len(r))
