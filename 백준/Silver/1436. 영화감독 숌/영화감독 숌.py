@@ -1,11 +1,9 @@
 n = int(input())
-movie_n = cnt = 0
-all_n = 666
-
+title = 665
+cnt = 0
 while cnt < n:
-    if '666' in str(all_n):
+    title += 1
+    if '666' in str(title):
         cnt += 1
-        movie_n = all_n
-    all_n += 1
 
-print(movie_n)
+print(title)
