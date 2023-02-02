@@ -7,12 +7,16 @@ for i in range(10):
     if i < 3:
         heapq.heappush(w, int(sys.stdin.readline()))
     else:
-        heapq.heappushpop(w, int(sys.stdin.readline()))
+        n = int(sys.stdin.readline())
+        if n > w[0]:
+            heapq.heapreplace(w, n)
 
 for i in range(10):
     if i < 3:
         heapq.heappush(k, int(sys.stdin.readline()))
     else:
-        heapq.heappushpop(k, int(sys.stdin.readline()))
+        n = int(sys.stdin.readline())
+        if n > k[0]:
+            heapq.heapreplace(k, n)
 
 print(sum(w), sum(k))
