@@ -7,13 +7,8 @@ stack = []
 num = 1
 io = []
 
-while len(io) < n*2:
-    if num == sequence[index]:
-        io.append('+')
-        io.append('-')
-        num += 1
-        index += 1
-    elif stack and stack[-1] == sequence[index]:
+for i in range(n*2):
+    if stack and stack[-1] == sequence[index]:
         stack.pop()
         io.append('-')
         index += 1
