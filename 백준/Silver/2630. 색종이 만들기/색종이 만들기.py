@@ -1,31 +1,32 @@
 import sys
 
-def what_color(copy_p):
-    l = len(copy_p)
+def what_color(y, x, l):
+    global white, blue
     is_differ = False
-
-    for y in range(l):
-        for x in range(l):
-            if copy_p[y][x] != copy_p[0][0]:
+    
+    for i in range(l):
+        for j in range(l):
+            if paper[y+i][x+j] != paper[y][x]:
                 is_differ = True
                 break
         if is_differ:
             break
-    else:
-        if copy_p[0][0]:
-            white_blue[1] += 1
-        else:
-            white_blue[0] += 1
-        return
-
+    
     if is_differ:
-        for i in range(0, l, l//2):
-            for j in range(0, l, l//2):
-                div_p = [copy_p[k][j:j+l//2] for k in range(i, i+l//2)]
-                what_color(div_p)
+        l //= 2
+        what_color(y, x, l)
+        what_color(y, x+l, l)
+        what_color(y+l, x, l)
+        what_color(y+l, x+l, l)
+    else:
+        if paper[y][x]:
+            blue += 1
+        else:
+            white += 1
+        return
 
 n = int(input())
 paper = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-white_blue = [0, 0]
-what_color(paper)
-print(*white_blue, sep='\n')
+white = blue = 0
+what_color(0, 0, n)
+print(white, blue, sep='\n')
