@@ -13,9 +13,9 @@ def what_color(copy_p):
             break
     else:
         if copy_p[0][0]:
-            blue.append(1)
+            white_blue[1] += 1
         else:
-            white.append(1)
+            white_blue[0] += 1
         return
 
     if is_differ:
@@ -26,7 +26,6 @@ def what_color(copy_p):
 
 n = int(input())
 paper = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-white = []
-blue = []
+white_blue = [0, 0]
 what_color(paper)
-print(sum(white), sum(blue), sep='\n')
+print(*white_blue, sep='\n')
