@@ -1,19 +1,18 @@
 import sys
 input = sys.stdin.readline
-from collections import deque
 
-def bfs(b, a, rain):
-    q = deque([(b, a)])
+def dfs(b, a, rain):
+    stack = [(b, a)]
     check[b][a] = True
 
-    while q:
-        y, x = q.popleft()
+    while stack:
+        y, x = stack.pop()
         for dy, dx in delta:
             yy = y + dy
             xx = x + dx
             if 0 <= yy < n and 0 <= xx < n:
                 if region[yy][xx] > rain and not check[yy][xx]:
-                    q.append((yy, xx))
+                    stack.append((yy, xx))
                     check[yy][xx] = True
 
 n = int(input())
@@ -30,7 +29,7 @@ for r in range(min_, max_):
     for i in range(n):
         for j in range(n):
             if region[i][j] > r and not check[i][j]:
-                bfs(i, j, r)
+                dfs(i, j, r)
                 cnt += 1
     
     if cnt > safe_zone:
