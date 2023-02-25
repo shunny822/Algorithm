@@ -1,17 +1,17 @@
 n, k = map(int, input().split())
-nums = [i for i in range(2, n+1)]
+nums = [0 for _ in range(n+1)]
 cnt = 0
 
-while cnt < k:
-    x = nums[0]
-    for i in range(len(nums)):
-        if i >= len(nums):
-            break
-        
-        if nums[i] % x == 0:
+for i in range(2, n+1):
+    if nums[i] == 1:
+        continue
+    if cnt == k:
+        break
+
+    for j in range(i, n+1, i):
+        if nums[j] == 0:
+            nums[j] = 1
             cnt += 1
-            if cnt == k:
-                print(nums.pop(i))
-                break
-            else:
-                nums.pop(i)
+        if cnt == k:
+            print(j)
+            break
