@@ -12,15 +12,14 @@ for n in name:
 
 odd = 0
 center = ''
-pal_name = []
-for k, v in pal.items():
+pal_name = ''
+for k, v in sorted(pal.items()):
     if v & 1:
         odd += 1
         center = k
         if odd > 1:
             print("I'm Sorry Hansoo")
             break
-    pal_name.append(k * (v//2))
+    pal_name += k * (v//2)
 else:
-    pal_name.sort()
-    print(*pal_name, center, *reversed(pal_name), sep='')
+    print(pal_name, center, pal_name[::-1], sep='')
