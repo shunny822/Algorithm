@@ -8,12 +8,12 @@ def cut(start, end):
         if tree > mid_h:
             mid += (tree - mid_h) * num
     
-    if mid == m or start == mid_h:
+    if start > end:
         return print(mid_h)
     elif mid < m:
-        cut(start, mid_h)
+        cut(start, mid_h-1)
     else:
-        cut(mid_h, end)
+        cut(mid_h+1, end)
 
 n, m = map(int, input().split())
 trees = {}
