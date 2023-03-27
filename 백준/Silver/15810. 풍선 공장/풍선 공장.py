@@ -5,7 +5,7 @@ n, m = map(int, input().split())
 staff = list(map(int, input().split()))
 
 start = 1
-end = max(staff) * m
+end = min(staff) * m
 min_time = 0
 
 while start <= end:
