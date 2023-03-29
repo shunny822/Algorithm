@@ -1,14 +1,13 @@
 import sys
+input = sys.stdin.readline
 
-n = int(input())
-sang = {}
-for num in sys.stdin.readline().split():
-    if int(num) in sang:
-        sang[int(num)] += 1
-    else:
-        sang[int(num)] = 1
+input()
+sg = {}
+for n in map(int, input().split()):
+    sg[n] = sg.get(n, 0) + 1
 
-m = int(input())
-card = list(map(int, sys.stdin.readline().split()))
-for c in card:
-    print(sang.get(c, 0), end=' ')
+input()
+nums = list(map(int, input().split()))
+
+for n in nums:
+    print(sg.get(n, 0), end=' ')
