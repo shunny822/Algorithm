@@ -5,9 +5,9 @@ from collections import deque
 n, k= map(int, input().split())
 belt = deque(map(int, input().split()))
 robots = deque([False] * 2 * n)
-cnt = turn = 0
+turn = 0
 
-while cnt < k:
+while k > 0:
     turn += 1
     belt.appendleft(belt.pop())
     robots.appendleft(robots.pop())
@@ -19,7 +19,7 @@ while cnt < k:
             robots[i+1] = True
             belt[i+1] -= 1
             if belt[i+1] == 0:
-                cnt += 1
+                k -= 1
     
     robots[n-1] = False
 
@@ -27,6 +27,6 @@ while cnt < k:
         robots[0] = True
         belt[0] -= 1
         if belt[0] == 0:
-            cnt += 1
+            k -= 1
 
 print(turn)
