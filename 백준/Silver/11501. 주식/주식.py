@@ -5,13 +5,11 @@ t = int(input())
 for _ in range(t):
     n = int(input())
     price = list(map(int, input().split()))
-    max_price = price[-1]
-    profit = 0
-
-    for i in reversed(range(n)):
-        if price[i] > max_price:
-            max_price = price[i]
+    max_n = 0
+    res = 0
+    for p in reversed(price):
+        if p > max_n:
+            max_n = p
         else:
-            profit += max_price - price[i]
-    
-    print(profit)
+            res += max_n - p
+    print(res)
