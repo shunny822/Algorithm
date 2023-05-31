@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 s = input().rstrip()
 parts = {s}
 for l in range(1, len(s)):
