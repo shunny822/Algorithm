@@ -1,17 +1,26 @@
-from sys import stdin
-input = lambda: stdin.readline().rstrip()
+import sys
+input = sys.stdin.readline
 
-if __name__ == "__main__":
-    N = int(input())
-    dists = [int(input()) for _ in range(N)]
-    ps = [0] * (2 * N + 1)
-    for i in range(2 * N):
-        ps[i + 1] = ps[i] + dists[i % N]
+n = int(input())
+top = []
+cnt = 0
 
-    ans = 0
-    total, right = sum(dists), 1
-    for left in range(2 * N):
-        while right < 2 * N + 1 and ps[right] - ps[left] <= total - ps[right] + ps[left]:
-            ans = max(ans, ps[right] - ps[left])
-            right += 1
-    print(ans)
+for _ in range(n):
+    cnt += int(input())
+    top.append(cnt)
+
+res = 0
+s = 0
+e = 1
+while s < e and e < n:
+    right = top[e] - top[s]
+    left = cnt - right
+    
+    if right > left:
+        s += 1
+        res = max(res, left)
+    else:
+        e += 1
+        res = max(res, right)
+
+print(res)
