@@ -2,31 +2,35 @@ import sys
 input = sys.stdin.readline
 from collections import deque
 
-n, k= map(int, input().split())
-belt = deque(map(int, input().split()))
-robots = deque([False] * 2 * n)
+n, k = map(int, input().split())
+l = list(map(int, input().split()))
+upper_belt = deque(l[:n])
+robot = deque([False] * n)
+lower_belt = deque(l[n:][::-1])
+
 turn = 0
-
-while k > 0:
+zero = 0
+while zero < k:
     turn += 1
-    belt.appendleft(belt.pop())
-    robots.appendleft(robots.pop())
-    robots[n-1] = False
+    lower_belt.append(upper_belt.pop())
+    upper_belt.appendleft(lower_belt.popleft())
+    robot.pop()
+    robot.appendleft(False)
+    robot[-1] = False
 
-    for i in reversed(range(n-1)):
-        if robots[i] and not robots[i+1] and belt[i+1] > 0:
-            robots[i] = False
-            robots[i+1] = True
-            belt[i+1] -= 1
-            if belt[i+1] == 0:
-                k -= 1
+    for i in range(n-1, 0, -1):
+        if robot[i-1] and upper_belt[i] > 0 and not robot[i]:
+            robot[i-1] = False
+            upper_belt[i] -= 1
+            robot[i] = True
+            if upper_belt[i] == 0:
+                zero += 1
+    robot[n-1] = False
+
+    if upper_belt[0] > 0:
+        upper_belt[0] -= 1
+        robot[0] = True
+        if upper_belt[0] == 0:
+            zero += 1
     
-    robots[n-1] = False
-
-    if belt[0] > 0:
-        robots[0] = True
-        belt[0] -= 1
-        if belt[0] == 0:
-            k -= 1
-
 print(turn)
