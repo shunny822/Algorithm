@@ -2,19 +2,18 @@ import sys
 input = sys.stdin.readline
 
 h, w = map(int, input().split())
-heights = {i: int(v) for i, v in enumerate(input().split())}
-blocks = sorted(heights.items(), key=lambda x: x[1], reverse=True)
+block = list(map(int, input().split()))
 cnt = 0
-center = left = right = blocks[0][0]
+stack = []
 
-for i, v in blocks:
-    if i < left:
-        for j in range(i+1, left):
-            cnt += v - heights[j]
-        left = i
-    elif i > right:
-        for j in range(right+1, i):
-            cnt += v - heights[j]
-        right = i
+for i, l in enumerate(block):
+    while stack and block[stack[-1]] < l:
+        little = block[stack.pop()]
+        if not stack:
+            break
+        d = i - stack[-1] - 1
+        wh = min(block[stack[-1]], l) - little
+        cnt += d * wh
+    stack.append(i)
 
 print(cnt)
