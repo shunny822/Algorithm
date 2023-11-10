@@ -1,25 +1,24 @@
 import sys
 input = sys.stdin.readline
-import itertools
+from itertools import combinations
 
 n, m = map(int, input().split())
-house = []
+home = []
 store = []
+
 for i in range(n):
     line = list(map(int, input().split()))
-    for j in range(n):
-        if line[j] == 1:
-            house.append((i, j))
-        elif line[j] == 2:
+    for j, num in enumerate(line):
+        if num == 1:
+            home.append((i, j))
+        elif num == 2:
             store.append((i, j))
 
-result = 1e9
-for combi in itertools.combinations(store, m):
-    total = 0
-    for r, c in house:
-        total += min([abs(r-y) + abs(c-x) for y, x in combi])
+ans = 1e9
+for picks in combinations(store, m):
+    temp = 0
+    for y, x in home:
+        temp += min([abs(yy-y) + abs(xx-x) for yy, xx in picks])
+    ans = min(ans, temp)
 
-    if total < result:
-        result = total
-
-print(result)
+print(ans)
