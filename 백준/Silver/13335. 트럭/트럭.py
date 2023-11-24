@@ -1,29 +1,21 @@
 import sys
+input = sys.stdin.readline
 from collections import deque
-intput = sys.stdin.readline
 
-n, length, wt = map(int, input().split())
-truck = deque(map(int, input().split()))
-done = deque()
-on_bridge = 0
-cnt = 0
+n, w, l = map(int, input().split())
+trucks = deque(map(int, input().split()))
+cnt = t = 0
+bridge = deque([0] * w)
 
-while truck:
-    if len(done) < length - 1:
-        if on_bridge + truck[0] <= wt:
-            x = truck.popleft()
-            done.append(x)
-            on_bridge += x
-        else:
-            done.append(0)
+while trucks:
+    t += 1
+    cnt -= bridge.popleft()
+
+    if cnt + trucks[0] <= l:
+        truck = trucks.popleft()
+        bridge.append(truck)
+        cnt += truck
     else:
-        if on_bridge + truck[0] <= wt:
-            x = truck.popleft()
-            done.append(x)
-            on_bridge = on_bridge + x - done.popleft()
-        else:
-            done.append(0)
-            on_bridge -= done.popleft()
-    cnt += 1
+        bridge.append(0)
 
-print(cnt + length)
+print(t+w)
