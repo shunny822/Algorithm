@@ -28,14 +28,17 @@ public class Main {
 			dp[i] = 0;
 		}
 		
+		int maxValue = 0;
+		
 		for (int i = 1; i < n+1; i++) {
 			int endDay = i + schedule[i-1][0] - 1;
+			maxValue = Math.max(maxValue, dp[i-1]);
 			
 			if (endDay <= n) {
-				dp[endDay] = Math.max(Arrays.stream(Arrays.copyOfRange(dp, 0, i)).max().getAsInt() + schedule[i-1][1], dp[endDay]);
+				dp[endDay] = Math.max(maxValue + schedule[i-1][1], dp[endDay]);
 			}
 		}
-        
-		System.out.println(Arrays.stream(dp).max().getAsInt());
+		
+		System.out.println(Math.max(maxValue, dp[n]));
 	}
 }
