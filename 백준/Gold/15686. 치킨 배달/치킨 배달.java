@@ -34,16 +34,11 @@ public class Main {
 	   return res;
    }
 
-   private static int getMinDistance(int[][] city, ArrayList<int[]> chickenStores, int[] chickenCombi) {
+   private static int getMinDistance(int[][] city, ArrayList<int[]> houses, ArrayList<int[]> chickenStores, int[] chickenCombi) {
       int res = 0;
-      int l = city.length;
       
-      for (int i = 0; i < l; i++) {
-    	  for (int j = 0; j < l; j++) {
-    		  if (city[i][j] == 1) {
-    			  res += calcChickenDistance(i, j, chickenStores, chickenCombi);
-    		  }
-    	  }
+      for (int[] house : houses) {
+    	  res += calcChickenDistance(house[0], house[1], chickenStores, chickenCombi);
       }
       
       return res;
@@ -56,6 +51,7 @@ public class Main {
       int N = Integer.parseInt(nums.nextToken());
       int M = Integer.parseInt(nums.nextToken());
       int[][] city = new int[N][N];
+      ArrayList<int[]> houses = new ArrayList<>();
       ArrayList<int[]> chickenStores = new ArrayList<>();
 
       for (int i = 0; i < N; i++) {
@@ -65,9 +61,12 @@ public class Main {
             int temp = Integer.parseInt(line.nextToken());
             city[i][j] = temp;
 
-            if (temp == 2) {
-               int[] chicken = {i, j};
-               chickenStores.add(chicken);
+            if (temp == 1) {
+               int[] house = {i, j};
+               houses.add(house);
+            } else if (temp == 2) {
+            	int[] chicken = {i, j};
+            	chickenStores.add(chicken);
             }
          }
       }
@@ -80,7 +79,7 @@ public class Main {
      
       int ans = (int) 1e9;
       for (int[] combi : chickenCombi) {
-    	  ans = Math.min(ans, getMinDistance(city, chickenStores, combi));
+    	  ans = Math.min(ans, getMinDistance(city, houses, chickenStores, combi));
       }
 
       System.out.println(ans);
