@@ -72,8 +72,6 @@ public class Main {
 				resIdx = i;
 			}
 		}
-		
 		System.out.println(resIdx + 1);
 	}
-
 }
