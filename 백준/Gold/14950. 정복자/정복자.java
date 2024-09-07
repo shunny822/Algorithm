@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 public class Main {
     static int N, M, t;
     static ArrayList<int[]>[] list;
-    static int[] dist;
     
     static int prim() {
     	PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(o -> o[1]));
@@ -50,14 +49,9 @@ public class Main {
         M = Integer.parseInt(nums.nextToken());
         t = Integer.parseInt(nums.nextToken());
         list = new ArrayList[N+1];
-        dist = new int[N+1];
         
         for (int i = 0; i < N+1; i++) {
         	list[i] = new ArrayList<>();
-        }
-        
-        for (int i = 2; i < N+1; i++) {
-        	dist[i] = Integer.MAX_VALUE;
         }
         
         for (int i = 0; i < M; i++) {
